@@ -23,7 +23,7 @@ const Home = () => {
       };
   
       preloadImages();
-    }, [imageUrls]);
+    }, []);
   
     return null; // No need to render anything
   };
