@@ -6,7 +6,7 @@ import ScrollTrigger from 'gsap/dist/ScrollTrigger'
 const Home = () => {
 
   const start = 1;
-  const end = 4986;
+  const end = 126;
 
   const imageFilenames = Array.from({ length: end }, (_, i) => {
     const paddedIndex = String(i + start).padStart(5, "0");
