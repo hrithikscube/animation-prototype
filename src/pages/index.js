@@ -74,7 +74,7 @@ const Home = () => {
   return (
     <Fragment>
 
-    <ImagePreloader imageUrls={imageFilenames.slice(1,102)} /> 
+    <ImagePreloader imageUrls={imageFilenames} /> 
 
       <div className="flex flex-col w-full relative overflow-auto min-h-screen">
 
