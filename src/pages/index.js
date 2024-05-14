@@ -3,6 +3,21 @@ import gsap from 'gsap/dist/gsap'
 import ScrollToPlugin from 'gsap/dist/ScrollToPlugin'
 import ScrollTrigger from 'gsap/dist/ScrollTrigger'
 
+const ImagePreloader = ({ imageUrls }) => {
+  useEffect(() => {
+    const preloadImages = () => {
+      imageUrls.forEach((imageUrl) => {
+        const img = new Image();
+        img.src = imageUrl;
+      });
+    };
+
+    preloadImages();
+  }, []);
+
+  return null; // No need to render anything
+};
+
 const Home = () => {
 
   const start = 1;
@@ -12,21 +27,6 @@ const Home = () => {
     const paddedIndex = String(i + start).padStart(5, "0");
     return "/sequence/" + paddedIndex + ".jpg";
   });
-
-  const ImagePreloader = ({ imageUrls }) => {
-    useEffect(() => {
-      const preloadImages = () => {
-        imageUrls.forEach((imageUrl) => {
-          const img = new Image();
-          img.src = imageUrl;
-        });
-      };
-  
-      preloadImages();
-    }, []);
-  
-    return null; // No need to render anything
-  };
 
   console.log(imageFilenames, 'imageFilenames')
 
