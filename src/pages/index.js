@@ -48,6 +48,7 @@ const Home = () => {
           end: '600% bottom',
           markers: true,
           pin: '.pin-this-image',
+          // scrub: 6,
           onUpdate: (self) => {
             let temp = Math.floor(self.progress * 100)
             if (temp >= 35) {
@@ -87,7 +88,7 @@ const Home = () => {
 
       <div className="flex flex-col w-full relative overflow-auto min-h-screen">
 
-        <div className='bg-red-500 w-full h-screen flex-shrink-0 flex flex-col items-center justify-center container-one'>
+        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center container-one'>
           <img
             // ref={imageRef}
             key={'unique-image-key'}
@@ -107,67 +108,67 @@ const Home = () => {
  */}
         </div>
 
-        <div className='bg-blue-500 w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
+        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
           Container 2
         </div>
 
-        <div className='bg-green-500 w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
+        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
           Container 3
         </div>
 
-        <div className='bg-cyan-500 w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
+        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
           Container 4
         </div>
 
-        <div className='bg-purple-500 w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
+        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
           Container 5
         </div>
 
-        <div className='bg-blue-500 w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
+        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
           Container 2
         </div>
 
-        <div className='bg-green-500 w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
+        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
           Container 3
         </div>
 
-        <div className='bg-cyan-500 w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
+        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
           Container 4
         </div>
 
-        <div className='bg-purple-500 w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
+        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
           Container 5
         </div>
 
-        <div className='bg-blue-500 w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
+        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
           Container 2
         </div>
 
-        <div className='bg-green-500 w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
+        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
           Container 3
         </div>
 
-        <div className='bg-cyan-500 w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
+        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
           Container 4
         </div>
 
-        <div className='bg-purple-500 w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
+        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
           Container 5
         </div>
 
-        <div className='bg-blue-500 w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
+        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
           Container 2
         </div>
 
-        <div className='bg-green-500 w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
+        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
           Container 3
         </div>
 
-        <div className='bg-cyan-500 w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
+        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
           Container 4
         </div>
 
-        <div className='bg-purple-500 w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
+        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
           Container 5
         </div>
 
