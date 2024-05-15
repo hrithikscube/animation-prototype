@@ -7,13 +7,6 @@ const withPWA = require('next-pwa')({
 
 const nextConfig = {
   reactStrictMode: true,
-  // source: '/:path*', // Match all paths
-  // headers: [
-  //   {
-  //     key: 'Cache-Control',
-  //     value: 'public, max-age=31536000, immutable' // 1 year
-  //   }
-  // ]
 };
 
 // module.exports = withPWA(nextConfig)
