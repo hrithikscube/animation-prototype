@@ -1,78 +1,23 @@
-import React, { Fragment, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap/dist/gsap'
-import ScrollToPlugin from 'gsap/dist/ScrollToPlugin'
 import ScrollTrigger from 'gsap/dist/ScrollTrigger'
+import ScrollToPlugin from 'gsap/dist/ScrollToPlugin'
 
-// import '../../public/bottle-sequence/00001.webp'
-// import '../../public/bottle-sequence/00002.webp'
-// import '../../public/bottle-sequence/00003.webp'
-// import '../../public/bottle-sequence/00004.webp'
-// import '../../public/bottle-sequence/00005.webp'
-// import '../../public/bottle-sequence/00006.webp'
-// import '../../public/bottle-sequence/00007.webp'
-// import '../../public/bottle-sequence/00008.webp'
-// import '../../public/bottle-sequence/00009.webp'
-// import '../../public/bottle-sequence/00010.webp'
+const start = 1;
+const end = 35;
 
-// import '../../public/bottle-sequence/00011.webp'
-// import '../../public/bottle-sequence/00012.webp'
-// import '../../public/bottle-sequence/00013.webp'
-// import '../../public/bottle-sequence/00014.webp'
-// import '../../public/bottle-sequence/00015.webp'
-// import '../../public/bottle-sequence/00016.webp'
-// import '../../public/bottle-sequence/00017.webp'
-// import '../../public/bottle-sequence/00018.webp'
-// import '../../public/bottle-sequence/00019.webp'
-// import '../../public/bottle-sequence/00020.webp'
-
-// import '../../public/bottle-sequence/00021.webp'
-// import '../../public/bottle-sequence/00022.webp'
-// import '../../public/bottle-sequence/00023.webp'
-// import '../../public/bottle-sequence/00024.webp'
-// import '../../public/bottle-sequence/00025.webp'
-// import '../../public/bottle-sequence/00026.webp'
-// import '../../public/bottle-sequence/00027.webp'
-// import '../../public/bottle-sequence/00028.webp'
-// import '../../public/bottle-sequence/00029.webp'
-// import '../../public/bottle-sequence/00030.webp'
-
-// import '../../public/bottle-sequence/00031.webp'
-// import '../../public/bottle-sequence/00032.webp'
-// import '../../public/bottle-sequence/00033.webp'
-// import '../../public/bottle-sequence/00034.webp'
-// import '../../public/bottle-sequence/00035.webp'
-
-const ImagePreloader = ({ imageUrls }) => {
-  useEffect(() => {
-    const preloadImages = () => {
-      imageUrls.forEach((imageUrl) => {
-        const img = new Image();
-        img.src = imageUrl;
-      });
-    };
-
-    preloadImages();
-  }, []);
-
-  return null; // No need to render anything
-};
+const imageFilenames = Array.from({ length: end }, (_, i) => {
+  const paddedIndex = String(i + start).padStart(5, "0");
+  return "/bottle-sequence/" + paddedIndex + ".webp";
+});
 
 const Home = () => {
 
-  const start = 1;
-  const end = 35;
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  console.log(imageFilenames[currentImageIndex], 'image url')
 
-  // const imageFilenames = Array.from({ length: end }, (_, i) => {
-  //   const paddedIndex = String(i + start).padStart(5, "0");
-  //   return "/sequence/" + paddedIndex + ".jpg";
-  // });
-
-  const imageFilenames = Array.from({ length: end }, (_, i) => {
-    const paddedIndex = String(i + start).padStart(5, "0");
-    return "/bottle-sequence/" + paddedIndex + ".webp";
-  });
-
-  // console.log(imageFilenames, 'imageFilenames')
+  // const videoRef = useRef(null)
+  const imageRef = useRef(null)
 
   useEffect(() => {
 
@@ -80,33 +25,29 @@ const Home = () => {
 
     let ctx = gsap.context(() => {
 
-      gsap.to('.pin-this-image', {
+      gsap.to('.pin-this', {
         scrollTrigger: {
-          trigger: '.container-one',
+          trigger: '.pin-this',
           start: 'top top',
-          end: '600% bottom',
-          markers: true,
-          pin: '.pin-this-image',
-          // scrub: 6,
+          end: '300% bottom',
+          // markers: true,
+          pin: true,
+          pinSpacing: false,
           onUpdate: (self) => {
-            let temp = Math.floor(self.progress * 100)
+            let temp = Math.floor(self.progress * 31)
             if (temp >= 35) {
-              return;
+              imageRef.current.src = imageFilenames[imageFilenames.length - 1]
             }
             else {
-              setCurrentImageIndex(Math.floor(self.progress * 100))
-              imageRef.current.src = imageFilenames[temp]
-              // document.getElementById('sequence-img').style.src = imageFilenames[temp]
+              setCurrentImageIndex(Math.floor(self.progress * 31))
+              if (temp >= 0) {
+                imageRef.current.src = imageFilenames[temp]
+              }
             }
-
-            // const video = videoRef.current;
-            // const scrollPercentage = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-            // const currentTime = scrollPercentage * video.duration;
-            // video.currentTime = currentTime;
           }
+
         }
       })
-
 
     })
 
@@ -114,116 +55,64 @@ const Home = () => {
 
   }, [])
 
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  console.log(imageFilenames[currentImageIndex], 'image url')
-
-  const videoRef = useRef(null)
-  const imageRef = useRef(null)
-
-  // console.log(currentImageIndex, 'currentImageIndex')
 
   return (
-    <Fragment>
+    <div className='relative bg-black text-white'>
 
-      <ImagePreloader imageUrls={imageFilenames} />
-
-      <div className="flex flex-col w-full relative overflow-auto min-h-screen">
-
-        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center container-one'>
+      <div className='flex flex-col items-center justify-center text-white h-screen  relative'>
+        <div className='w-full h-screen flex items-center justify-center pin-this z-[19]'>
           <img
             id="sequence-img"
             ref={imageRef}
             key={'unique-image-key'}
-            // src={imageFilenames[currentImageIndex]}
-            src="/bottle-sequence/00001.jpg"
+            src="/bottle-sequence/00001.webp"
             alt="image"
-            className={`w-full h-full object-cover pin-this-image ${currentImageIndex >= 35 ? 'hidden' : 'block'}`} />
-
-          {/* <video
-            perload="auto"
-            // key={'video-unique-key'}
-            ref={videoRef}
-            src="/batman.mp4"
-            alt="batman"
-            controls={true}
-            className='w-full h-full object-cover pin-this-image' />
- */}
+            className={`w-full h-full object-cover`} />
         </div>
 
-        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
-          Container 2
-        </div>
+        <div className='w-full h-screen flex-shrink-0 flex flex-col items-center justify-start pt-44 absolute z-[18]'>
 
-        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
-          Container 3
-        </div>
+          <div className='flex flex-col items-center justify-center text-center -mt-1'>
+            <h1 className=' lg:text-xl text-center'>Smarter Sips, Effortless Wellbeing.</h1>
+            <h2 className='text-cyanLight opacity-90 lg:text-8xl font-semibold'>Series L1</h2>
+          </div>
 
-        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
-          Container 4
         </div>
-
-        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
-          Container 5
-        </div>
-
-        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
-          Container 2
-        </div>
-
-        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
-          Container 3
-        </div>
-
-        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
-          Container 4
-        </div>
-
-        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
-          Container 5
-        </div>
-
-        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
-          Container 2
-        </div>
-
-        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
-          Container 3
-        </div>
-
-        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
-          Container 4
-        </div>
-
-        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
-          Container 5
-        </div>
-
-        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
-          Container 2
-        </div>
-
-        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
-          Container 3
-        </div>
-
-        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
-          Container 4
-        </div>
-
-        <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
-          Container 5
-        </div>
-
       </div>
 
-    </Fragment>
+      <div className='z-[20] relative'>
+
+        <div className='w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
+          <div className='flex flex-col items-center justify-center text-center gap-2'>
+            <h1 className='text-white lg:text-xl text-center'>LWL8 - Smart Water Bottle Is Your Ultimate Companion!</h1>
+            <h2 className='text-cyanLight opacity-90 lg:text-6xl font-semibold'>Ultimate Campanion!</h2>
+          </div>
+        </div>
+
+        <div className='w-full h-screen flex-shrink-0 flex flex-col items-center justify-center'>
+          <div className='flex flex-col items-center justify-center text-center gap-2'>
+            <h2 className='text-white lg:text-6xl font-semibold'>Let's Discover Why</h2>
+          </div>
+        </div>
+      </div>
+
+
+      <div className='bg-purple-500 w-full h-screen flex items-center justify-center'>
+        hello world
+      </div>
+
+
+    </div>
   )
 }
 
 export default Home
 
+
 export async function getStaticProps() {
   let data = {}
+  //call page api here
+  
   return {
     props: {
       data: data
