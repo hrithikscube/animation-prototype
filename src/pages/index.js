@@ -179,11 +179,11 @@ const Home = () => {
 
 export default Home
 
-export async function getServerSideProps() {
-  let data = {}
-  return {
-    props: {
-      data: data
-    }
-  }
-}
+// export async function getServerSideProps() {
+//   let data = {}
+//   return {
+//     props: {
+//       data: data
+//     }
+//   }
+// }
