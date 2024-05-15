@@ -181,13 +181,13 @@ const Home = () => {
 export default Home
 
 
-// export async function getStaticProps() {
-//   let data = {}
-//   //call page api here
+export async function getServerSideProps() {
+  let data = {}
+  //call page api here
 
-//   return {
-//     props: {
-//       data: data
-//     }
-//   }
-// }
+  return {
+    props: {
+      data: data
+    }
+  }
+}
