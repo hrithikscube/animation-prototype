@@ -21,14 +21,19 @@ const ImagePreloader = ({ imageUrls }) => {
 const Home = () => {
 
   const start = 1;
-  const end = 105;
+  const end = 35;
+
+  // const imageFilenames = Array.from({ length: end }, (_, i) => {
+  //   const paddedIndex = String(i + start).padStart(5, "0");
+  //   return "/sequence/" + paddedIndex + ".jpg";
+  // });
 
   const imageFilenames = Array.from({ length: end }, (_, i) => {
     const paddedIndex = String(i + start).padStart(5, "0");
-    return "/sequence/" + paddedIndex + ".jpg";
+    return "/bottle-sequence/" + paddedIndex + ".webp";
   });
 
-  console.log(imageFilenames, 'imageFilenames')
+  // console.log(imageFilenames, 'imageFilenames')
 
   useEffect(() => {
 
@@ -40,13 +45,17 @@ const Home = () => {
         scrollTrigger: {
           trigger: '.container-one',
           start: 'top top',
-          end: '1700% bottom',
+          end: '600% bottom',
           markers: true,
           pin: '.pin-this-image',
           onUpdate: (self) => {
             let temp = Math.floor(self.progress * 100)
-
-            setCurrentImageIndex(Math.floor(self.progress * 100))
+            if (temp >= 35) {
+              return;
+            }
+            else {
+              setCurrentImageIndex(Math.floor(self.progress * 100))
+            }
 
             // const video = videoRef.current;
             // const scrollPercentage = window.scrollY / (document.body.scrollHeight - window.innerHeight);
@@ -69,25 +78,25 @@ const Home = () => {
   const videoRef = useRef(null)
   const imageRef = useRef(null)
 
-  console.log(currentImageIndex, 'currentImageIndex')
+  // console.log(currentImageIndex, 'currentImageIndex')
 
   return (
     <Fragment>
 
-    <ImagePreloader imageUrls={imageFilenames} /> 
+      <ImagePreloader imageUrls={imageFilenames} />
 
       <div className="flex flex-col w-full relative overflow-auto min-h-screen">
 
         <div className='bg-red-500 w-full h-screen flex-shrink-0 flex flex-col items-center justify-center container-one'>
-           <img
+          <img
             // ref={imageRef}
             key={'unique-image-key'}
             src={imageFilenames[currentImageIndex]}
             // src="/sequence/00001.jpg" 
             alt="image"
-            className='w-[700px] h-[450px] object-cover pin-this-image' /> 
+            className={`w-full h-full object-cover pin-this-image ${currentImageIndex >= 35 ? 'hidden' : 'block'}`} />
 
-           {/* <video
+          {/* <video
             perload="auto"
             // key={'video-unique-key'}
             ref={videoRef}
