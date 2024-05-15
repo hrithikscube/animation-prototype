@@ -56,6 +56,8 @@ const Home = () => {
             }
             else {
               setCurrentImageIndex(Math.floor(self.progress * 100))
+              imageRef.current.src = imageFilenames[temp]
+              // document.getElementById('sequence-img').style.src = imageFilenames[temp]
             }
 
             // const video = videoRef.current;
@@ -90,10 +92,11 @@ const Home = () => {
 
         <div className='bg-black w-full h-screen flex-shrink-0 flex flex-col items-center justify-center container-one'>
           <img
-            // ref={imageRef}
+            id="sequence-img"
+            ref={imageRef}
             key={'unique-image-key'}
-            src={imageFilenames[currentImageIndex]}
-            // src="/sequence/00001.jpg" 
+            // src={imageFilenames[currentImageIndex]}
+            src="/bottle-sequence/00001.jpg"
             alt="image"
             className={`w-full h-full object-cover pin-this-image ${currentImageIndex >= 35 ? 'hidden' : 'block'}`} />
 
@@ -180,11 +183,11 @@ const Home = () => {
 
 export default Home
 
-// export async function getServerSideProps() {
-//   let data = {}
-//   return {
-//     props: {
-//       data: data
-//     }
-//   }
-// }
+export async function getStaticProps() {
+  let data = {}
+  return {
+    props: {
+      data: data
+    }
+  }
+}
