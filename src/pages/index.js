@@ -67,7 +67,7 @@ const Home = () => {
         <div className='w-full h-screen flex items-center justify-center pin-this z-[19]'>
           <img
             id="sequence-img"
-            ref={imageRef}
+            // ref={imageRef}
             key={'unique-image-key'}
             src={imageFilenames[currentImageIndex]}
             // src="/bottle-sequence/00001.webp"
