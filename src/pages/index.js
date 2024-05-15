@@ -37,10 +37,12 @@ const Home = () => {
             let temp = Math.floor(self.progress * 31)
             if (temp >= 35) {
               imageRef.current.src = imageFilenames[imageFilenames.length - 1]
+              setCurrentImageIndex(imageFilenames[imageFilenames.length - 1])
             }
             else {
               setCurrentImageIndex(Math.floor(self.progress * 31))
               if (temp >= 0) {
+                setCurrentImageIndex(temp)
                 imageRef.current.src = imageFilenames[temp]
               }
             }
@@ -60,12 +62,13 @@ const Home = () => {
     <div className='relative bg-black text-white'>
 
       <div className='flex flex-col items-center justify-center text-white h-screen  relative'>
-        <div className='w-full h-screen flex items-center justify-center pin-this z-[19]'>
+        <div className='w-full h-screen flex items-center justify-center pin-this z-[19] lg:p-0 px-4'>
           <img
             id="sequence-img"
             ref={imageRef}
             key={'unique-image-key'}
-            src="/bottle-sequence/00001.webp"
+            src={imageFilenames[currentImageIndex]}
+            // src="/bottle-sequence/00001.webp"
             alt="image"
             className={`w-full h-full object-cover`} />
         </div>
@@ -98,7 +101,7 @@ const Home = () => {
 
 
       <div className='bg-purple-500 w-full h-screen flex items-center justify-center'>
-        hello world
+        Hello world
       </div>
 
 
@@ -109,13 +112,13 @@ const Home = () => {
 export default Home
 
 
-export async function getStaticProps() {
-  let data = {}
-  //call page api here
-  
-  return {
-    props: {
-      data: data
-    }
-  }
-}
+// export async function getStaticProps() {
+//   let data = {}
+//   //call page api here
+
+//   return {
+//     props: {
+//       data: data
+//     }
+//   }
+// }
